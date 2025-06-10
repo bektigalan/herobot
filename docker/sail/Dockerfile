@@ -52,6 +52,11 @@ RUN apt-get update \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
+COPY start-container /usr/local/bin/start-container
+COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+COPY php.ini /etc/php/8.4/cli/conf.d/99-sail.ini
+RUN chmod +x /usr/local/bin/start-container
+
 RUN apt-get update && apt-get install -y dos2unix \
     && dos2unix /usr/local/bin/start-container \
     && dos2unix /etc/supervisor/conf.d/supervisord.conf \
@@ -74,11 +79,6 @@ RUN cd /tmp && \
 
 # Enable the extension
 RUN echo "extension=vector_search.so" > /etc/php/8.4/cli/conf.d/30-vector-search.ini
-
-COPY start-container /usr/local/bin/start-container
-COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
-COPY php.ini /etc/php/8.4/cli/conf.d/99-sail.ini
-RUN chmod +x /usr/local/bin/start-container
 
 EXPOSE 8000
 
