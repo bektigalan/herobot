@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('integrations', function (Blueprint $table) {
+        Schema::create('channels', function (Blueprint $table) {
             $table->id();
             $table->foreignId('team_id')->constrained();
             $table->string('name');
@@ -31,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('integrations');
+        Schema::dropIfExists('channels');
     }
 };

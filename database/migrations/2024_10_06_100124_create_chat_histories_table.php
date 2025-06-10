@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('chat_histories', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('integration_id')->constrained()->onDelete('cascade');
+            $table->foreignId('channel_id')->constrained()->onDelete('cascade');
             $table->string('sender');
             $table->text('message');
             $table->text('response');
